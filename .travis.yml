@@ -1,0 +1,13 @@
+language: bash
+services: docker
+
+env:
+  - PHPVERSION="7.1"
+  - PHPVERSION="7.2"
+
+script:
+  - docker build -f ./${PHPVERSION}/Dockerfile -t ${PHPVERSION} ./${PHPVERSION}
+
+after_script:
+  - docker images
+  - docker run --rm -ti ${PHPVERSION} php -i
